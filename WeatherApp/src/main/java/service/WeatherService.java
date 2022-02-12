@@ -12,6 +12,14 @@ public class WeatherService {
     public static final String HTTPS_API_OPENWEATHERMAP_ORG_DATA_2_5_WEATHER = "https://api.openweathermap.org/data/2.5/weather";
     private static String FIXED_APPIKEY = "7edda0bea071419a1e1da9c91ac2d4c6";
 
+
+    /**
+     *
+     * @param lat
+     * @param lon
+     * @return WeatherResponse object
+     * @throws IOException
+     */
     public WeatherResponse getLiveWeatherValues(String lat, String lon) throws IOException {
         OkHttpClient client = new OkHttpClient();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -21,6 +29,8 @@ public class WeatherService {
                 .method("GET", null)
                 .build();
         ResponseBody responseBody = client.newCall(request).execute().body();
-        return objectMapper.readValue(responseBody.string(), WeatherResponse.class);
+        String json = responseBody.string();
+        WeatherResponse responseBean = objectMapper.readValue(json, WeatherResponse.class);
+        return responseBean;
     }
 }

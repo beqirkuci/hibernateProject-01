@@ -34,6 +34,10 @@ public class WeatherResponse {
     @JsonProperty("cod")
     private Integer cod;
 
+
+
+
+
     @JsonProperty("coord")
     public Coord getCoord() {
         return coord;
